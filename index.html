@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratik Ghuge - Backend Developer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+            --text-light: #f1f5f9;
+            --text-gray: #94a3b8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            right: -150px;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: -100px;
+            animation-delay: 7s;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: 50%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(90deg); }
+            50% { transform: translateY(-60px) rotate(180deg); }
+            75% { transform: translateY(-30px) rotate(270deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .typing-animation {
+            border-right: 2px solid var(--primary-color);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-left: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: 4px solid var(--bg-dark);
+        }
+
+        .timeline-date {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+        }
+
+        .skill-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 1rem;
+            }
+
+            .timeline-item {
+                margin-left: 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">Pratik.dev</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Pratik Ghuge</h1>
+                <p class="subtitle typing-animation">Backend Developer</p>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-gray);">
+                    Crafting scalable web applications with Python, Django & FastAPI<br>
+                    Turning complex problems into intelligent solutions
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Let's Connect</a>
+                    <a href="#projects" class="btn btn-secondary">View My Work</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="reveal">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="profile-card">
+                    <div class="profile-img">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Backend Developer</h3>
+                    <p>Mumbai, Maharashtra</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">1.5+</div>
+                            <div>Years Exp</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div>Open Source Commits</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">Top 20</div>
+                            <div>SWOC Rank</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">
+                        Passionate Backend Developer with expertise in building scalable web applications using Python, Django, and FastAPI.
+                    </p>
+                    <p style="margin-bottom: 1.5rem;">
+                        I specialize in developing robust RESTful APIs, implementing secure authentication systems, and creating efficient data processing pipelines. My experience spans from real-time stock market tracking systems to multi-tenant SaaS platforms with AI integrations.
+                    </p>
+                    <p style="margin-bottom: 1.5rem;">
+                        Currently working as Backend Developer at MobiTrail, where I've engineered multiple systems including AIM3 (stock tracking with Ollama AI), AppInsights (multi-tenant DMS for ICICI Securities), and various POC projects. I'm also building high-performance FastAPI personal project with async operations.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="reveal">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                                <div class="timeline-item">
+                    <div class="timeline-date">Mar 2024 - Present</div>
+                    <h3 class="timeline-title">Software Developer - Backend</h3>
+                    <div class="timeline-company">MobiTrail, Mumbai, India</div>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">AIM3 - Stock Market Tracking System (Product)</h4>
+                        <ul style="margin-left: 1rem; margin-bottom: 1.5rem;">
+                            <li>Engineered scalable backend using Django for real-time stock market insights</li>
+                            <li>Integrated Y-Finance API and built web scraping pipelines with BeautifulSoup</li>
+                            <li>Implemented rule-based sentiment analysis for actionable insights filtering</li>
+                            <li>Integrated Ollama AI for personalized email drafting and automation</li>
+                            <li>Built interactive stock graphs with Dash for market trend visualization</li>
+                            <li>Automated daily emails, data scraping using schedulers and cron jobs</li>
+                            <li>Integrated Prometheus & Grafana for comprehensive system monitoring</li>
+                            <li>Integrated FAQ chatbot for enhanced user assistance</li>
+                        </ul>
+
+                        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">AppInsights - Document Management System (Client: ICICI Securities → SaaS)</h4>
+                        <ul style="margin-left: 1rem; margin-bottom: 1.5rem;">
+                            <li>Transformed client-specific DMS into multi-tenant SaaS platform using Django</li>
+                            <li>Designed schema-based MySQL architecture for data isolation per company</li>
+                            <li>Implemented secure document encryption/decryption with Python cryptography</li>
+                            <li>Developed JWT authentication and role-based access control</li>
+                            <li>Built custom middleware for logging, rate limiting, and validation</li>
+                            <li>Added centralized superuser management for multi-company onboarding</li>
+                            <li>Building automated auditing and document classification for compliance</li>
+                        </ul>
+
+                        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">eMeeting Audit System (POC Product)</h4>
+                        <ul style="margin-left: 1rem; margin-bottom: 1.5rem;">
+                            <li>Developing comprehensive eMeeting management system using Django</li>
+                            <li>Built agenda management, meeting scheduling, and document handling</li>
+                            <li>Implemented invitation system with RSVP tracking and response management</li>
+                            <li>Managing attendees, committees, and meeting-related forms efficiently</li>
+                            <li>Creating POC to showcase meeting transparency and productivity features</li>
+                        </ul>
+
+                        <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Shriram Wealth - Investor Management Dashboard (POC)</h4>
+                        <ul style="margin-left: 1rem; margin-bottom: 1.5rem;">
+                            <li>Developed dual dashboards: Admin and Relationship Manager portals</li>
+                            <li>Built investor management system with funding tracking capabilities</li>
+                            <li>Integrated Ollama AI for intelligent investment suggestions and recommendations</li>
+                            <li>Created relationship manager interface for investor portfolio management</li>
+                            <li>Implemented comprehensive admin controls for system oversight</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">May 2025 - Jul 2025</div>
+                    <h3 class="timeline-title">Django Trainer</h3>
+                    <div class="timeline-company">QuickXpert Infotech, Thane</div>
+                    <ul style="margin-left: 1rem;">
+                        <li>Conducted comprehensive Django training sessions covering fundamental to advanced concepts</li>
+                        <li>Designed and delivered hands-on projects with real-world applications</li>
+                        <li>Guided students through practical implementation of Django REST APIs</li>
+                        <li>Taught best coding standards</li>
+                        <li>Mentored students in building complete web applications from scratch</li>
+                        <li>Provided personalized support and resolved complex Django queries</li>
+                        <li>Covered advanced topics including authentication, database optimization, and API security</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Jan 2025 - March 2025</div>
+                    <h3 class="timeline-title">Open Source Contributor</h3>
+                    <div class="timeline-company">Social Winter of Code (SWOC)</div>
+                    <ul style="margin-left: 1rem;">
+                        <li>Contributed 200+ commits across multiple open-source projects</li>
+                        <li>Secured Top 20 Contributor Rank among hundreds of participants</li>
+                        <li>Integrated Auth0 OAuth 2.0 for face recognition attendance system</li>
+                        <li>Implemented logging systems and dynamic search functionality</li>
+                        <li>Developed dark mode and responsive UI components</li>
+                        <li>Created documentation for 200+ programming languages</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="education" class="reveal">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Aug 2023 – Feb 2024</div>
+                    <h3 class="timeline-title">Full Stack Web Development Master’s Course</h3>
+                    <div class="timeline-company">IT Vedant Education Pvt Ltd, Andheri</div>
+                    <ul style="margin-left: 1rem;">
+                        <li>Comprehensive training in full-stack web development</li>
+                        <li>Covered technologies including HTML, CSS, JavaScript, Python, Django, and more</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Jun 2020 – Jun 2023</div>
+                    <h3 class="timeline-title">Bachelor of Computer Applications</h3>
+                    <div class="timeline-company">Savitribai Phule Pune University, Pune</div>
+                    <ul style="margin-left: 1rem;">
+                        <li>GPA: 8.14/10</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Jun 2018 – Mar 2020</div>
+                    <h3 class="timeline-title">Higher Secondary Certificate (HSC) – Science</h3>
+                    <div class="timeline-company">SBNE Junior College, Nashik, Maharashtra State Board</div>
+                    <ul style="margin-left: 1rem;">
+                        <li>Percentage: 65.5%</li>
+                    </ul>
+                </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code" style="color: var(--primary-color);"></i> Programming & Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Django REST Framework</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-database" style="color: var(--accent-color);"></i> Database & Performance</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Redis</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-shield-alt" style="color: var(--secondary-color);"></i> Security & Authentication</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">JWT</span>
+                        <span class="skill-tag">OAuth 2.0</span>
+                        <span class="skill-tag">Auth0</span>
+                        <span class="skill-tag">Encryption/Decryption</span>
+                        <span class="skill-tag">Role-based Access Control</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-line" style="color: var(--primary-color);"></i> Monitoring & Testing</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Prometheus</span>
+                        <span class="skill-tag">Grafana</span>
+                        <span class="skill-tag">PyTest</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-tasks" style="color: var(--accent-color);"></i> DevOps & Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Git/GitHub</span>
+                        <span class="skill-tag">Celery</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-robot" style="color: var(--secondary-color);"></i> AI & Data Processing</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AI API Integration</span>
+                        <span class="skill-tag">Web Scraping</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>AIM3 - Stock Market Tracking System (Product)</h3>
+                    <p>Comprehensive real-time stock market tracking platform with AI-powered insights, sentiment analysis, and automated personalized communication.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Y-Finance</span>
+                        <span class="tech-tag">BeautifulSoup</span>
+                        <span class="tech-tag">Ollama AI</span>
+                        <span class="tech-tag">Dash</span>
+                        <span class="tech-tag">Prometheus</span>
+                        <span class="tech-tag">Grafana</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <strong>Key Features:</strong>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Real-time stock data integration with Y-Finance</li>
+                            <li>AI-powered personalized email drafting with Ollama</li>
+                            <li>Automated financial news scraping and sentiment analysis</li>
+                            <li>Interactive stock graphs with Dash visualization</li>
+                            <li>Comprehensive system monitoring and analytics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h3>AppInsights - Document Management SaaS (ICICI Securities)</h3>
+                    <p>Scalable multi-tenant document management platform transformed from client-specific solution to enterprise SaaS with advanced security.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Multi-tenant</span>
+                        <span class="tech-tag">Encryption</span>
+                        <span class="tech-tag">Redis</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <strong>Key Features:</strong>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Schema-based multi-tenant architecture</li>
+                            <li>End-to-end document encryption/decryption</li>
+                            <li>JWT authentication with role-based access</li>
+                            <li>Automated auditing and compliance features</li>
+                            <li>Custom middleware for logging and validation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>eMeeting Audit System (POC)</h3>
+                    <p>Comprehensive meeting management platform for efficient agenda handling, attendee management, and meeting productivity enhancement.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Meeting Management</span>
+                        <span class="tech-tag">RSVP System</span>
+                        <span class="tech-tag">Document Handling</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <strong>Key Features:</strong>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Advanced agenda and meeting scheduling</li>
+                            <li>Intelligent invitation system with RSVP tracking</li>
+                            <li>Committee and attendee management</li>
+                            <li>Meeting forms and document organization</li>
+                            <li>Meeting transparency and productivity analytics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Shriram Wealth - Investor Management (POC)</h3>
+                    <p>AI-powered dual-dashboard system for comprehensive investor relationship management with intelligent investment suggestions.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Ollama AI</span>
+                        <span class="tech-tag">Dual Dashboard</span>
+                        <span class="tech-tag">Investment Analytics</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <strong>Key Features:</strong>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Separate Admin and Relationship Manager portals</li>
+                            <li>Ollama AI integration for investment recommendations</li>
+                            <li>Comprehensive investor portfolio management</li>
+                            <li>Funding tracking and relationship analytics</li>
+                            <li>Advanced admin oversight and control systems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Corporate Investor Management Platform (Personal)</h3>
+                    <p>High-performance FastAPI backend for comprehensive corporate investor relationship management with async operations.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Async Operations</span>
+                        <span class="tech-tag">Database Optimization</span>
+                        <span class="tech-tag">RESTful APIs</span>
+                        <span class="tech-tag">Meeting Analytics</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <strong>Key Features:</strong>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Async FastAPI backend for optimal performance</li>
+                            <li>Complete investor relationship management</li>
+                            <li>Meeting tracking with discussion documentation</li>
+                            <li>High-performance async database operations</li>
+                            <li>Advanced analytics for investor engagement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>Open Source Contributions (SWOC)</h3>
+                    <p>Major contributions to multiple Django and Flask projects with focus on authentication, UI enhancements, and documentation.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">Javascript</span>
+                        <span class="tech-tag">OAuth 2.0</span>
+                        <span class="tech-tag">Streamlit</span>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <strong>Notable Contributions:</strong>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>OAuth 2.0 integration for attendance system</li>
+                            <li>AI-powered learning platform enhancements</li>
+                            <li>Dark mode and responsive UI implementations</li>
+                            <li>Documentation for 200+ programming languages</li>
+                            <li>Top 20 rank with 200+ successful commits</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-content">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Mumbai, Maharashtra, India</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3>Phone</h3>
+                        <p>+91 9372926289</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>ghugepratik13@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div>
+                        <h3>LinkedIn</h3>
+                        <p>Connect with me professionally</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="font-size: 1.2rem; color: var(--text-gray); margin-bottom: 2rem;">
+                    Ready to build something amazing together? <br>
+                    Let's connect through my social profiles!
+                </p>
+                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <a href="mailto:ghugepratik13@gmail.com" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Email Me
+                    </a>
+                    <a href="tel:+919372926289" class="btn btn-secondary">
+                        <i class="fas fa-phone"></i> Call Me
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="mailto:ghugepratik13@gmail.com" class="social-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="tel:+919372926289" class="social-link">
+                <i class="fas fa-phone"></i>
+            </a>
+            <a href="www.linkedin.com/in/pratik-ghuge1926" class="social-link">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/Frpratik" class="social-link">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <p>&copy; 2025 Pratik Ghuge. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; color: var(--text-gray);">
+            Crafted with ❤️ and lots of ☕ | Backend Developer
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(15, 23, 42, 0.95)';
+            } else {
+                header.style.background = 'rgba(15, 23, 42, 0.8)';
+            }
+        });
+
+        // Reveal animations on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // Typing animation
+        const typingElement = document.querySelector('.typing-animation');
+        const texts = [
+            'Backend Developer',
+            'Django & FastAPI Expert',
+            'Advisor - Backend Developement',
+            'Open Source Contributor'
+        ];
+        let currentIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            const currentText = texts[currentIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeWriter, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                currentIndex = (currentIndex + 1) % texts.length;
+                setTimeout(typeWriter, 500);
+            } else {
+                setTimeout(typeWriter, isDeleting ? 50 : 100);
+            }
+        }
+
+        // Start typing animation after initial load
+        setTimeout(typeWriter, 3000);
+
+        // Contact buttons functionality
+        document.querySelectorAll('a[href^="mailto:"], a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Add a subtle feedback effect
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Add floating particles effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = 'rgba(99, 102, 241, 0.6)';
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1';
+            
+            document.body.appendChild(particle);
+            
+            const animation = particle.animate([
+                { transform: 'translateY(0px)', opacity: 1 },
+                { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'linear'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 300);
+
+        // Add mouse cursor trail effect
+        let mouseTrail = [];
+        document.addEventListener('mousemove', function(e) {
+            mouseTrail.push({ x: e.clientX, y: e.clientY, time: Date.now() });
+            
+            // Remove old trail points
+            mouseTrail = mouseTrail.filter(point => Date.now() - point.time < 500);
+            
+            // Create trail effect
+            if (mouseTrail.length > 1) {
+                const trail = document.createElement('div');
+                trail.style.position = 'fixed';
+                trail.style.left = e.clientX + 'px';
+                trail.style.top = e.clientY + 'px';
+                trail.style.width = '6px';
+                trail.style.height = '6px';
+                trail.style.background = 'rgba(139, 92, 246, 0.6)';
+                trail.style.borderRadius = '50%';
+                trail.style.pointerEvents = 'none';
+                trail.style.zIndex = '9999';
+                trail.style.transform = 'translate(-50%, -50%)';
+                
+                document.body.appendChild(trail);
+                
+                setTimeout(() => {
+                    trail.style.transition = 'all 0.5s ease-out';
+                    trail.style.opacity = '0';
+                    trail.style.transform = 'translate(-50%, -50%) scale(0)';
+                    setTimeout(() => trail.remove(), 500);
+                }, 10);
+            }
+        });
+
+        // Add 3D tilt effect to project cards
+        document.querySelectorAll('.project-card, .skill-category').forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20; // Increased divisor for subtler effect
+                const rotateY = (centerX - x) / 20; // Increased divisor for subtler effect
+                
+                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+
+        // Add progress bars for skills (animated on scroll)
+        const skillCategories = document.querySelectorAll('.skill-category');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillTags = entry.target.querySelectorAll('.skill-tag');
+                    skillTags.forEach((tag, index) => {
+                        setTimeout(() => {
+                            tag.style.animation = 'fadeInUp 0.5s ease-out forwards';
+                            tag.style.animationDelay = `${index * 0.1}s`;
+                        }, 200);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        skillCategories.forEach(category => {
+            skillObserver.observe(category);
+        });
+    </script>
+</body>
+</html>
