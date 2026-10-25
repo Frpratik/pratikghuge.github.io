@@ -126,6 +126,10 @@ section { padding:clamp(5rem, 11vw, 9rem) 0; position:relative; }
 .me-foot { display:flex; justify-content:space-between; gap:.6rem; flex-wrap:wrap; padding:.8rem 0 .3rem; font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
 .me-foot b { color:var(--accent); font-weight:500; }
 .graph.me .me-foot { padding-right:clamp(4.2rem, 8vw, 6.4rem); }
+.flow-m { display:none; }
+.flow-m text { font-size:13px; }
+.flow-m text.sub { font-size:10px; }
+.flow-m .loop-label { font-size:10px; }
 .badge { position:absolute; right:-1.4rem; bottom:-2.2rem; width:clamp(88px, 10vw, 128px); aspect-ratio:1; animation:spin 22s linear infinite; z-index:2; }
 .badge text { font-family:var(--mono); font-size:11.6px; letter-spacing:.2em; fill:var(--ink); text-transform:uppercase; }
 .badge .core { fill:var(--accent); }
@@ -218,6 +222,9 @@ section { padding:clamp(5rem, 11vw, 9rem) 0; position:relative; }
 .stack { display:flex; flex-direction:column; gap:1.6rem; }
 .pcard { position:sticky; top:calc(84px + var(--i) * 14px); border:1.5px solid #12110f; border-radius:28px; padding:clamp(1.4rem,3.4vw,2.8rem); color:#12110f; display:grid; grid-template-columns:1.15fr 1fr; gap:1.5rem clamp(1.5rem,4vw,4rem); min-height:min(440px, 72vh); background:var(--bg); box-shadow:0 -14px 40px rgba(0,0,0,.08); }
 .pcard .pl { display:flex; flex-direction:column; gap:1.4rem; }
+.feat { margin-top:1rem; display:flex; flex-direction:column; gap:.5rem; max-width:54ch; }
+.feat li { position:relative; padding-left:1.3rem; font-size:.92rem; line-height:1.45; }
+.feat li::before { content:'↳'; position:absolute; left:0; font-weight:600; }
 .pcard .num { font-family:var(--serif); font-size:clamp(3rem,6vw,5.2rem); line-height:.8; letter-spacing:-.05em; }
 .viz { width:100%; height:auto; max-height:200px; border:1.5px solid #12110f; border-radius:18px; background:rgba(255,255,255,.35); padding:.6rem; }
 .viz .s { fill:none; stroke:#12110f; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
@@ -244,8 +251,8 @@ section { padding:clamp(5rem, 11vw, 9rem) 0; position:relative; }
 
 /* ═════════ ACHIEVEMENTS ═════════ */
 .ach { display:grid; grid-template-columns:repeat(4,1fr); border-top:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink); }
-.ach div { padding:2.2rem 1.2rem 2rem 0; }
-.ach div + div { padding-left:1.4rem; border-left:1px solid var(--line); }
+.ach > div { padding:2.2rem 1.2rem 2rem 0; }
+.ach > div + div { padding-left:1.4rem; border-left:1px solid var(--line); }
 .ach .n { font-family:var(--serif); font-size:clamp(2.8rem,6.4vw,5.6rem); line-height:.95; letter-spacing:-.04em; }
 .ach .n em { color:var(--accent); }
 .ach .l { color:var(--muted); font-size:.92rem; margin-top:.7rem; max-width:24ch; }
@@ -296,8 +303,8 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
   .graph { margin-bottom:1.6rem; }
   .hero-actions { justify-content:flex-start; }
   .about-grid, .ach, .c-grid { grid-template-columns:1fr 1fr; }
-  .about-item:nth-child(3), .ach div:nth-child(3), .c-item:nth-child(3) { border-left:0; padding-left:0; }
-  .about-item:nth-child(n+3), .ach div:nth-child(n+3), .c-item:nth-child(n+3) { border-top:1px solid var(--line); margin-top:1.4rem; }
+  .about-item:nth-child(3), .ach > div:nth-child(3), .c-item:nth-child(3) { border-left:0; padding-left:0; }
+  .about-item:nth-child(n+3), .ach > div:nth-child(n+3), .c-item:nth-child(n+3) { border-top:1px solid var(--line); margin-top:1.4rem; }
   .about-body { grid-template-columns:1fr; }
   .srow { grid-template-columns:60px 1fr; }
   .srow .chips-col { grid-column:2; }
@@ -312,7 +319,7 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
   .stat:nth-child(3) { padding-left:0; border-top:1px solid var(--line); margin-top:1rem; padding-top:1rem; }
   .stat:nth-child(4) { border-top:1px solid var(--line); margin-top:1rem; padding-top:1rem; }
   .about-grid, .ach, .c-grid { grid-template-columns:1fr; }
-  .about-item + .about-item, .ach div + div, .c-item + .c-item { border-left:0; padding-left:0; border-top:1px solid var(--line); margin-top:1.4rem; }
+  .about-item + .about-item, .ach > div + div, .c-item + .c-item { border-left:0; padding-left:0; border-top:1px solid var(--line); margin-top:1.4rem; }
   .about-item:hover, .c-item:hover { padding-left:0; }
   .srow { grid-template-columns:1fr; }
   .srow .no { padding-top:0; }
@@ -326,6 +333,48 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
   .hero-actions .pill { flex:1 1 100%; justify-content:center; }
   .pcard { top:calc(74px + var(--i) * 10px); border-radius:22px; }
   .c-row p { margin-right:0; }
+}
+@media (hover:none) {
+  .graph:hover { transform:none; box-shadow:8px 8px 0 var(--ink); }
+  .srow:hover, .job-btn:hover, .edu-row:hover { padding-left:0; }
+}
+html { -webkit-tap-highlight-color:transparent; }
+@media (max-width:640px) {
+  section { padding:3.6rem 0; }
+  .sec-head { margin-bottom:1.8rem; }
+  .flow-d { display:none; }
+  .flow-m { display:block; }
+  .badge { display:none; }
+  .graph { box-shadow:5px 5px 0 var(--ink); padding:.9rem .9rem .5rem; border-radius:22px; }
+  .graph-cap { font-size:.6rem; flex-wrap:wrap; }
+  .graph .me-foot { padding-right:0; font-size:.6rem; }
+  .hero { padding-top:calc(68px + 1.4rem); }
+  .hero-top { flex-direction:column; gap:.35rem; font-size:.68rem; }
+  .intro { font-size:1.2rem; }
+  .tagline { font-size:.72rem; line-height:1.6; }
+  .hero-actions .pill { padding:.9rem 1.2rem; }
+  .band { margin:1.2rem 0; padding:.8rem 0; }
+  .stack { gap:1.1rem; }
+  .pcard { position:relative; top:auto; box-shadow:none; padding:1.3rem; gap:1.2rem; }
+  .pcard .pl { gap:.9rem; }
+  .pcard .num { font-size:2.6rem; }
+  .viz { max-height:150px; }
+  .pcard .side { gap:1rem; }
+  .metric { font-size:1.9rem; }
+  .srow { padding:1.5rem 0; }
+  .meters { margin-top:1rem; }
+  .job-btn { padding:1.3rem 0; }
+  .plus { width:38px; height:38px; }
+  .edu-row { padding:1.3rem 0; }
+  .ach > div { padding:1.4rem 0; }
+  .mega { font-size:21vw; }
+  .cta-pad { display:none; }
+  .ach { grid-template-columns:1fr 1fr; }
+  .ach > div { padding:1.3rem .8rem 1.3rem 0; border-left:0; border-top:0; margin-top:0; }
+  .ach > div:nth-child(even) { padding-left:1rem; border-left:1px solid var(--line); }
+  .ach > div:nth-child(n+3) { border-top:1px solid var(--line); }
+  .ach .n { font-size:2.5rem; }
+  .ach .l { font-size:.82rem; }
 }
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
@@ -380,7 +429,7 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
         </h1>
         <div class="graph fade d1">
           <div class="graph-cap"><span><b>●</b> always ready to ship</span><span>always ready to learn ↻</span></div>
-          <svg class="flow" viewBox="0 0 520 300" role="img" aria-label="A graph about Pratik: curiosity leads to Pratik, who fans out into learning, building and scaling, which all lead to shipping to production, and a loop returns to curiosity so the cycle repeats">
+          <svg class="flow flow-d" viewBox="0 0 520 300" role="img" aria-label="A graph about Pratik: curiosity leads to Pratik, who fans out into learning, building and scaling, which all lead to shipping to production, and a loop returns to curiosity so the cycle repeats">
             <path id="e1" class="edge" d="M94 145 H128"/>
             <path id="e2" class="edge" d="M220 145 C242 145 240 58 262 58"/>
             <path id="e3" class="edge" d="M220 145 H262"/>
@@ -407,6 +456,35 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
               <circle class="pulse" r="4.5"><animateMotion dur="1.7s" repeatCount="indefinite" begin="1.4s"><mpath href="#e7"/></animateMotion></circle>
               <circle class="pulse" r="4.5"><animateMotion dur="4.2s" repeatCount="indefinite" begin="0s"><mpath href="#e8"/></animateMotion></circle>
               <circle class="pulse" r="4.5"><animateMotion dur="4.2s" repeatCount="indefinite" begin="2.1s"><mpath href="#e8"/></animateMotion></circle>
+            </g>
+          </svg>
+          <svg class="flow flow-m" viewBox="0 0 352 372" role="img" aria-label="A graph about Pratik: curiosity leads to Pratik, who fans out into learn, build and scale, which lead to ship, and a loop returns to curiosity so the cycle repeats">
+            <path id="m1" class="edge" d="M176 56 V84"/>
+            <path id="m2" class="edge" d="M176 132 C176 152 64 150 64 170"/>
+            <path id="m3" class="edge" d="M176 132 V170"/>
+            <path id="m4" class="edge" d="M176 132 C176 152 288 150 288 170"/>
+            <path id="m5" class="edge" d="M64 218 C64 244 176 242 176 268"/>
+            <path id="m6" class="edge" d="M176 218 V268"/>
+            <path id="m7" class="edge" d="M288 218 C288 244 176 242 176 268"/>
+            <path id="m8" class="edge loop" d="M236 292 H344 V32 H236"/>
+            <rect class="tag-bg" x="66" y="340" width="220" height="22" rx="11"/>
+            <text class="loop-label" x="176" y="351">ship · learn · repeat ↻</text>
+            <g class="nd"><rect x="116" y="8" width="120" height="48" rx="13"/><text x="176" y="28">curiosity</text><text class="sub" x="176" y="44">asks why</text></g>
+            <g class="nd hot"><rect x="116" y="84" width="120" height="48" rx="13"/><text x="176" y="104">Pratik</text><text class="sub" x="176" y="120">backend + GenAI</text></g>
+            <g class="nd"><rect x="16" y="170" width="96" height="48" rx="13"/><text x="64" y="190">learn</text><text class="sub" x="64" y="206">system design</text></g>
+            <g class="nd"><rect x="128" y="170" width="96" height="48" rx="13"/><text x="176" y="190">build</text><text class="sub" x="176" y="206">APIs · agents</text></g>
+            <g class="nd"><rect x="240" y="170" width="96" height="48" rx="13"/><text x="288" y="190">scale</text><text class="sub" x="288" y="206">built to grow</text></g>
+            <g class="nd hot"><rect x="116" y="268" width="120" height="48" rx="13"/><text x="176" y="288">ship ✓</text><text class="sub" x="176" y="304">to production</text></g>
+            <g class="pulses">
+              <circle class="pulse" r="4.5"><animateMotion dur="1.4s" repeatCount="indefinite" begin="0s"><mpath href="#m1"/></animateMotion></circle>
+              <circle class="pulse" r="4.5"><animateMotion dur="1.6s" repeatCount="indefinite" begin="0.3s"><mpath href="#m2"/></animateMotion></circle>
+              <circle class="pulse" r="4.5"><animateMotion dur="1.4s" repeatCount="indefinite" begin="0.6s"><mpath href="#m3"/></animateMotion></circle>
+              <circle class="pulse" r="4.5"><animateMotion dur="1.6s" repeatCount="indefinite" begin="0.9s"><mpath href="#m4"/></animateMotion></circle>
+              <circle class="pulse" r="4.5"><animateMotion dur="1.6s" repeatCount="indefinite" begin="0.2s"><mpath href="#m5"/></animateMotion></circle>
+              <circle class="pulse" r="4.5"><animateMotion dur="1.4s" repeatCount="indefinite" begin="0.7s"><mpath href="#m6"/></animateMotion></circle>
+              <circle class="pulse" r="4.5"><animateMotion dur="1.6s" repeatCount="indefinite" begin="1.1s"><mpath href="#m7"/></animateMotion></circle>
+              <circle class="pulse" r="4.5"><animateMotion dur="4.4s" repeatCount="indefinite" begin="0s"><mpath href="#m8"/></animateMotion></circle>
+              <circle class="pulse" r="4.5"><animateMotion dur="4.4s" repeatCount="indefinite" begin="2.2s"><mpath href="#m8"/></animateMotion></circle>
             </g>
           </svg>
           <div class="me-foot"><span>Mumbai <b>→</b> working globally</span><span>owns it end to end</span></div>
@@ -453,7 +531,7 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
     <p class="statement" id="statement" style="margin-top:1.6rem;">I don't just write code. I architect backends that scale, and I build GenAI systems that actually ship to production.</p>
     <div class="about-body fade">
       <p>I'm a <strong>Backend &amp; GenAI Engineer</strong> with about 3 years of experience building secure, production-ready systems in Python, Django, FastAPI and MySQL/PostgreSQL — from a live stock-market intelligence platform to a multi-tenant SaaS document-management system for ICICI Securities.</p>
-      <p>I like to understand <strong>what we're building and why</strong> before I write code, and I take ownership from design to deployment. On top of that foundation I build <strong>RAG pipelines, agents and multi-agent systems</strong> with LangChain and LangGraph — and I'm now deepening my <strong>system design</strong> for both backend and GenAI architectures.</p>
+      <p>I like to understand <strong>what we're building and why</strong> before I write code, and I take ownership from design to deployment. On top of that foundation I build <strong>RAG pipelines, agents and multi-agent systems</strong> with LangChain and LangGraph (most recently <strong>Citera AI</strong>, a document Q&amp;A that cites its sources) — and I'm now deepening my <strong>system design</strong> for both backend and GenAI architectures.</p>
     </div>
     <div class="about-grid">
       <div class="about-item fade"><span class="no">01</span><h3>GenAI <em style="color:var(--accent)">engineering</em></h3><p>LLM integration, RAG, tool-using agents and multi-agent orchestration, built to run reliably behind real APIs.</p></div>
@@ -476,7 +554,7 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
       <span class="no">01</span>
       <h3>GenAI<br>Engineering</h3>
       <div class="chips-col">
-        <div class="chips"><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">RAG Pipelines</span><span class="chip">AI Agents</span><span class="chip">Multi-Agent Systems</span><span class="chip">LLM API Integration</span><span class="chip">Ollama</span><span class="chip">Prompt Engineering</span></div>
+        <div class="chips"><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">RAG Pipelines</span><span class="chip">AI Agents</span><span class="chip">Multi-Agent Systems</span><span class="chip">LLM API Integration</span><span class="chip">Ollama</span><span class="chip">Groq</span><span class="chip">pgvector</span><span class="chip">Embeddings &amp; Reranking</span><span class="chip">Prompt Engineering</span></div>
         <div class="meters">
           <div><div class="m-top"><span>LangChain / LangGraph</span><span>85%</span></div><div class="m-line"><i data-w="85"></i></div></div>
           <div><div class="m-top"><span>RAG Pipelines</span><span>85%</span></div><div class="m-line"><i data-w="85"></i></div></div>
@@ -647,22 +725,27 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
     </div>
     <div class="stack">
 
-      <!-- TODO: replace with the real GenAI project (name, description, stack, GitHub URL) -->
       <article class="pcard" style="--i:0;--bg:#ff4d1c;">
         <div class="pl">
-        <div class="num">01</div>
-        <div>
-          <div class="kind">Personal · GenAI <span class="tagb">In progress</span></div>
-          <h3>GenAI project — details coming soon</h3>
-          <p>An agentic GenAI application built with LangChain, LangGraph and RAG. The write-up, architecture and source link land here shortly.</p>
-        </div>
+          <div class="num">01</div>
+          <div>
+            <div class="kind">Personal · GenAI <span class="tagb">Open source</span></div>
+            <h3>Citera AI — answers only from your documents</h3>
+            <p>Upload PDFs, ask questions in plain English, and get answers grounded in your own documents, with page-number citations. If the answer isn't in the documents, it says so instead of guessing.</p>
+            <ul class="feat">
+              <li>Semantic retrieval, then re-ranking, then grounded generation — orchestrated as a LangGraph workflow</li>
+              <li>PostgreSQL + pgvector keeps text, metadata and vectors in one database</li>
+              <li>Small embedding and re-ranking models run locally; Groq serves the chat LLM</li>
+              <li>Background worker, health checks and a Prometheus metrics endpoint, all Dockerised</li>
+              <li>Evaluation scripts for retrieval quality and end-to-end answers</li>
+            </ul>
+          </div>
         </div>
         <div class="side">
-          <svg class="viz" viewBox="0 0 240 130" aria-hidden="true"><circle class="w" cx="22" cy="65" r="14"/><text x="22" y="65">Q</text><path class="s" d="M36 65 H62"/><rect class="f" x="62" y="48" width="46" height="34" rx="8"/><text x="85" y="65" style="fill:#fff">RAG</text><path class="s" d="M108 58 C124 40 128 30 140 30 M108 65 H140 M108 72 C124 90 128 100 140 100"/><g class="bob"><rect class="w" x="140" y="20" width="28" height="20" rx="3"/></g><g class="bob2"><rect class="w" x="140" y="55" width="28" height="20" rx="3"/></g><g class="bob"><rect class="w" x="140" y="90" width="28" height="20" rx="3"/></g><path class="s" d="M168 30 C184 30 190 60 200 65 M168 65 H200 M168 100 C184 100 190 70 200 65"/><circle class="f" cx="214" cy="65" r="14"/><path d="M208 65 l4 4 8-9" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div class="ptags"><span>LangChain</span><span>LangGraph</span><span>RAG</span><span>Agents</span><span>FastAPI</span></div>
-          <div class="metric">Building now<small>GenAI</small></div>
-          <!-- TODO: set href to the GitHub repo URL and remove class "soon" -->
-          <span class="gh soon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub link coming soon</span>
+          <svg class="viz" viewBox="0 0 240 130" aria-hidden="true"><g class="bob"><path class="w" d="M12 30 h26 l8 8 v38 h-34z"/><path class="s" d="M38 30 v8 h8"/><path class="s" d="M18 52 h22 M18 60 h22 M18 68 h14"/></g><text x="29" y="94">PDF</text><path class="s" d="M54 56 H72 M67 51 L72 56 L67 61"/><g class="bob2"><path class="w" d="M76 42 v30 c0 6 8 9 16 9 s16 -3 16 -9 v-30"/><ellipse class="w" cx="92" cy="42" rx="16" ry="6"/><path class="s" d="M76 57 c0 6 8 9 16 9 s16 -3 16 -9"/></g><text x="92" y="94">pgvector</text><path class="s" d="M114 56 H130 M125 51 L130 56 L125 61"/><rect class="f" x="134" y="38" width="42" height="9" rx="4"/><rect class="w" x="134" y="54" width="31" height="9" rx="4"/><rect class="w" x="134" y="70" width="20" height="9" rx="4"/><text x="155" y="94">rerank</text><path class="s" d="M182 56 H196 M191 51 L196 56 L191 61"/><g class="bob"><rect class="f" x="200" y="34" width="32" height="42" rx="8"/><path d="M207 46 h18 M207 54 h18 M207 62 h10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/></g><rect class="w" x="198" y="82" width="36" height="14" rx="7"/><text x="216" y="89">p.12</text></svg>
+          <div class="ptags"><span>FastAPI</span><span>LangGraph</span><span>RAG</span><span>pgvector</span><span>PostgreSQL</span><span>Groq</span><span>Docker</span></div>
+          <div class="metric">Cited answers<small>page-level sources</small></div>
+          <a class="gh" href="https://github.com/Frpratik/Citera-AI-" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View on GitHub ↗</a>
         </div>
       </article>
 
@@ -746,21 +829,20 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
         </div>
       </article>
 
-      <!-- TODO: add GitHub URLs for both hackathon projects -->
       <article class="pcard" style="--i:6;--bg:#ffe66d;">
         <div class="pl">
         <div class="num">07</div>
         <div>
           <div class="kind">Hackathon · Morrow 1.0 (MnM) <span class="tagb">Top 100 / 1,383+</span></div>
-          <h3>RailVoice — Civic Problem Resolution</h3>
-          <p>Early prototype of Resolvia: commuters raise issues directly at Western Railway stations so station admins can escalate and resolve them end to end.</p>
+          <h3>RailVoice — Public Issue Reporting</h3>
+          <p>AI-powered public issue reporting for Western Railway (Churchgate to Virar): commuters raise issues at stations, and admins escalate and resolve them end to end. A web app plus a public API.</p>
         </div>
         </div>
         <div class="side">
           <svg class="viz" viewBox="0 0 240 130" aria-hidden="true"><path class="s" d="M0 110 C70 110 100 60 240 60 M0 124 C70 124 100 74 240 74"/><path class="s" d="M20 106 L18 128 M44 100 L40 122 M68 88 L62 110 M92 76 L86 98 M116 68 L112 90 M140 63 L138 85 M164 61 L164 83 M188 60 L188 82 M212 60 L212 82"/><g class="bob"><circle class="f" cx="150" cy="38" r="9"/><path class="s" d="M150 47 V54"/></g><g class="bob2"><rect class="w" x="22" y="14" width="76" height="30" rx="8"/><text x="60" y="29">issue raised</text></g></svg>
-          <div class="ptags"><span>Prototype</span><span>Civic Tech</span></div>
+          <div class="ptags"><span>FastAPI</span><span>Next.js</span><span>PostgreSQL</span><span>pgvector</span><span>Redis</span><span>Celery</span></div>
           <div class="metric">Top 100<small>of 1,383+ teams</small></div>
-          <span class="gh soon">GitHub link coming soon</span>
+          <a class="gh" href="https://github.com/Frpratik/rail-voice" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View on GitHub ↗</a>
         </div>
       </article>
 
@@ -769,15 +851,15 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
         <div class="num">08</div>
         <div>
           <div class="kind">Hackathon · Code to Creation <span class="tagb">Rank 4 / 150+</span></div>
-          <h3>HQMS — Queue Management</h3>
-          <p>A prototype proposing a scalable approach to structured queue handling for healthcare, interviews and other high-footfall processes.</p>
+          <h3>HQMS — Hospital Queue Management</h3>
+          <p>Multi-tenant hospital SaaS for outpatient virtual queues: workstations for admins, doctors and receptionists, a mobile patient tracker, and waiting-room TV displays synced over WebSockets.</p>
         </div>
         </div>
         <div class="side">
           <svg class="viz" viewBox="0 0 240 130" aria-hidden="true"><path class="s" d="M10 100 H230"/><g class="bob"><circle class="f" cx="30" cy="62" r="11"/><path class="s" d="M14 100 C14 78 46 78 46 100"/></g><g class="bob2"><circle class="w" cx="68" cy="66" r="10"/><path class="s" d="M53 100 C53 82 83 82 83 100"/></g><g class="bob"><circle class="w" cx="104" cy="69" r="9"/><path class="s" d="M91 100 C91 85 117 85 117 100"/></g><g class="bob2"><circle class="w" cx="136" cy="72" r="8"/><path class="s" d="M125 100 C125 88 147 88 147 100"/></g><path class="s" d="M162 70 H182 M176 64 L182 70 L176 76"/><rect class="f" x="192" y="40" width="38" height="46" rx="8"/><text x="211" y="63" style="fill:#fff;font-size:15px">#4</text></svg>
-          <div class="ptags"><span>Prototype</span><span>Queue Systems</span></div>
+          <div class="ptags"><span>FastAPI</span><span>Next.js</span><span>WebSockets</span><span>PostgreSQL</span><span>Docker</span></div>
           <div class="metric">Rank 4<small>of 150+ teams</small></div>
-          <span class="gh soon">GitHub link coming soon</span>
+          <a class="gh" href="https://github.com/Frpratik/HQMS" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View on GitHub ↗</a>
         </div>
       </article>
     </div>
