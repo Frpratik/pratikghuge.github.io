@@ -106,8 +106,7 @@ section { padding:clamp(5rem, 11vw, 9rem) 0; position:relative; }
 .live i { width:8px; height:8px; border-radius:50%; background:#22c55e; animation:ping 2s infinite; }
 @keyframes ping { 70% { box-shadow:0 0 0 9px rgba(34,197,94,0); } 0% { box-shadow:0 0 0 0 rgba(34,197,94,.6); } }
 .hero-split { display:grid; grid-template-columns:1fr; margin-top:clamp(1rem,2.4vw,1.8rem); }
-.graph { width:100%; max-width:100%; position:relative; border:1.5px solid var(--ink); border-radius:28px; background:var(--paper-2); padding:1rem 1rem .6rem; box-shadow:8px 8px 0 var(--ink); transition:transform .5s var(--ease), box-shadow .5s var(--ease); }
-.graph:hover { transform:translate(-3px,-3px); box-shadow:12px 12px 0 var(--accent); }
+.graph { width:100%; max-width:100%; position:relative; }
 .graph-cap { display:flex; justify-content:space-between; gap:.5rem; font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:.4rem; }
 .graph-cap b { color:var(--accent); font-weight:500; }
 .graph svg.flow { width:100%; height:auto; overflow:visible; }
@@ -121,7 +120,7 @@ section { padding:clamp(5rem, 11vw, 9rem) 0; position:relative; }
 .flow text.sub { font-size:8px; letter-spacing:.04em; fill:var(--muted); }
 .flow .nd.hot text.sub { fill:#12110f; opacity:.75; }
 .flow .nd.hot text { fill:#12110f; font-weight:500; }
-.flow .tag-bg { fill:var(--paper-2); }
+.flow .tag-bg { fill:var(--paper); }
 .flow .loop-label { font-size:9px; letter-spacing:.1em; text-transform:uppercase; fill:var(--accent); }
 .flow .pulse { fill:var(--accent); stroke:var(--paper); stroke-width:1.5; }
 .me-foot { display:flex; justify-content:space-between; gap:.6rem; flex-wrap:wrap; padding:.8rem 0 .3rem; font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
@@ -374,7 +373,6 @@ footer { background:#12110f; color:#f2eee3; padding:1.6rem 0 calc(1.6rem + env(s
   .flow-m { display:block; max-width:440px; margin-inline:auto; }
 }
 @media (hover:none) {
-  .graph:hover { transform:none; box-shadow:8px 8px 0 var(--ink); }
   .srow:hover, .job-btn:hover, .edu-row:hover { padding-left:0; }
 }
 html { -webkit-tap-highlight-color:transparent; }
@@ -384,7 +382,6 @@ html { -webkit-tap-highlight-color:transparent; }
   .flow-d { display:none; }
   .flow-m { display:block; }
   .badge { display:none; }
-  .graph { box-shadow:5px 5px 0 var(--ink); padding:.9rem .9rem .5rem; border-radius:22px; }
   .graph-cap { font-size:.6rem; flex-wrap:wrap; }
   .graph .me-foot { padding-right:0; font-size:.6rem; }
   .hero { padding-top:calc(68px + 1.4rem); }
